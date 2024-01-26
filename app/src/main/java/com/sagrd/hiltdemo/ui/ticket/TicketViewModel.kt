@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ class TicketViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            ticketRepository.getTickets().onEach { result ->
+            ticketRepository.getTickets().collectLatest { result ->
                 when (result) {
                     is Resource.Loading -> {
                         _state.update {
@@ -39,13 +40,13 @@ class TicketViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         _state.update {
-                            it.copy(ticket = result.data)
+                            it.copy(ticket = result.data, isLoading = false)
                         }
                     }
 
                     is Resource.Error -> {
                         _state.update {
-                            it.copy(error = result.message)
+                            it.copy(error = result.message, ticket = emptyList(), isLoading = false)
                         }
                     }
                 }

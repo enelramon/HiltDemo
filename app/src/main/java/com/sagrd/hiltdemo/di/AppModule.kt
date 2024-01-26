@@ -23,6 +23,8 @@ object AppModule {
             .build()
     }
 
+    @Provides
+    @Singleton
     fun providesTicketApi(moshi: Moshi): TicketApi {
         return Retrofit.Builder()
             .baseUrl("https://sag-api.azurewebsites.net/")

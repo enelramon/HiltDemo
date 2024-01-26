@@ -59,7 +59,12 @@ dependencies {
 
     //ultima version del bom aqui: https://developer.android.com/jetpack/compose/bom
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+        
+    val lifeCycleVersion = "2.7.0"
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifeCycleVersion")
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:$lifeCycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifeCycleVersion")
+
     implementation("androidx.activity:activity-compose:1.8.2")
 
     implementation(platform("androidx.compose:compose-bom:2023.10.01"))
@@ -72,6 +77,7 @@ dependencies {
     //Hilt
     implementation("com.google.dagger:hilt-android:2.48")
     ksp("com.google.dagger:hilt-android-compiler:2.48")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
 
     //retrofit

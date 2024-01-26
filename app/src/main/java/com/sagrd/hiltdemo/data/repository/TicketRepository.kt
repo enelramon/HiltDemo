@@ -23,7 +23,6 @@ class TicketRepository @Inject constructor(
 
             emit(Resource.Success(tickets))
 
-
         } catch (e: HttpException) {
             //error general HTTP
             emit(Resource.Error(e.message ?: "Error HTTP GENERAL"))
