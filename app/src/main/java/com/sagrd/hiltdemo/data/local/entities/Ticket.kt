@@ -12,3 +12,4 @@ data class Ticket(
     var asunto: String = "",
     var solicitud: String = ""
 )
+
