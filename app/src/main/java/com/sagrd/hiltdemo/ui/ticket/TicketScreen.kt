@@ -13,12 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.sagrd.hiltdemo.data.remote.dto.TicketResponse
+import com.sagrd.hiltdemo.data.local.entities.Ticket
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TicketScreen(
-    ticket: TicketResponse
+    ticket: Ticket
 ) {
     //eleveated card with rounded corners and
     ElevatedCard(
@@ -36,7 +36,7 @@ private fun TicketScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
-                Text(text = "Ticket #: ${ticket.idTicket}")
+                Text(text = "Ticket #: ${ticket.ticketId}")
                 Text(text = "Fecha: ${ticket.fecha.take(10)}")
             }
             Row(
@@ -49,7 +49,7 @@ private fun TicketScreen(
                     text = "Empresa: ${ticket.empresa}",
                     style = MaterialTheme.typography.titleMedium
                 )
-                Text(text = "${ticket.getPeriod()} ago", color = MaterialTheme.colorScheme.error)
+                //Text(text = "${ticket.getPeriod()} ago", color = MaterialTheme.colorScheme.error)
             }
 
             Text(text = "Asunto: ${ticket.asunto}")

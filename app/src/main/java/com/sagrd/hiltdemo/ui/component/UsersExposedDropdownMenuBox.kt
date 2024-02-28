@@ -12,19 +12,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.sagrd.hiltdemo.data.remote.dto.UsuarioDto
+import com.sagrd.hiltdemo.data.local.entities.Usuario
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun UsersExposedDropdownMenuBox(
-    users: List<UsuarioDto>,
+    users: List<Usuario>,
     onUserSelected: (Int) -> Unit,
     modifier: Modifier
 ) {
     var isExpanded by rememberSaveable {
         mutableStateOf(false)
     }
-    var selectedUser: UsuarioDto? by rememberSaveable {
+    var selectedUser: Usuario? by rememberSaveable {
         mutableStateOf(null)
     }
     if (selectedUser==null && users.isNotEmpty()){
@@ -38,7 +38,7 @@ fun UsersExposedDropdownMenuBox(
     )
     {
         OutlinedTextField(
-            value = "${selectedUser?.idUsuario} - ${selectedUser?.nombres}",
+            value = "${selectedUser?.usuarioId} - ${selectedUser?.nombres}",
             onValueChange = {},
             readOnly = true,
             trailingIcon = {
@@ -53,12 +53,12 @@ fun UsersExposedDropdownMenuBox(
             users.forEach { user ->
                 DropdownMenuItem(
                     text={
-                        Text(text = "${user.idUsuario} - ${user.nombres}")
+                        Text(text = "${user.usuarioId} - ${user.nombres}")
                          },
                     onClick = {
                         isExpanded = false
                         selectedUser = user
-                        onUserSelected(user.idUsuario)
+                        onUserSelected(user.usuarioId?:0)
                     }
                 )
             }

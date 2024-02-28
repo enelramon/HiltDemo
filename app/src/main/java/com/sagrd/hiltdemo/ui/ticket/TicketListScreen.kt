@@ -33,8 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sagrd.hiltdemo.data.remote.dto.TicketResponse
-import com.sagrd.hiltdemo.data.remote.dto.UsuarioDto
+import com.sagrd.hiltdemo.data.local.entities.Ticket
+import com.sagrd.hiltdemo.data.local.entities.Usuario
 import com.sagrd.hiltdemo.ui.component.UsersExposedDropdownMenuBox
 import com.sagrd.hiltdemo.ui.theme.HiltDemoTheme
 
@@ -97,8 +97,8 @@ fun TicketListScreen(viewModel: TicketViewModel = hiltViewModel()) {
 
 @Composable
 private fun TicketListBody(
-    tickets: List<TicketResponse>,
-    users: List<UsuarioDto> = emptyList(),
+    tickets: List<Ticket>,
+    users: List<Usuario> = emptyList(),
     onUserSelected: (Int) -> Unit,
     onVerTicket: (Int) -> Unit
 ) {
@@ -132,12 +132,12 @@ private fun TicketListBody(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TicketCard(
-    ticket: TicketResponse,
+    ticket: Ticket,
     onVerTicket: (Int) -> Unit
 ) {
     //eleveated card with rounded corners and
     ElevatedCard(
-        onClick = { onVerTicket(ticket.idTicket) },
+        onClick = { onVerTicket(ticket.ticketId?:0) },
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(
@@ -151,7 +151,7 @@ private fun TicketCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
-                Text(text = "Ticket #: ${ticket.idTicket}")
+                Text(text = "Ticket #: ${ticket.ticketId?:0}")
                 Text(text = "Fecha: ${ticket.fecha.take(10)}")
             }
             Row(
@@ -164,7 +164,7 @@ private fun TicketCard(
                     text = "Empresa: ${ticket.empresa}",
                     style = MaterialTheme.typography.titleMedium
                 )
-                Text(text = "${ticket.getPeriod()} ago", color = MaterialTheme.colorScheme.error)
+                //Text(text = "${ticket.getPeriod()} ago", color = MaterialTheme.colorScheme.error)
             }
 
             Text(text = "Asunto: ${ticket.asunto}")
@@ -176,7 +176,7 @@ private fun TicketCard(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TicketScreen(
-    ticket: TicketResponse
+    ticket: Ticket
 ) {
     //eleveated card with rounded corners and
     ElevatedCard(
@@ -194,7 +194,7 @@ private fun TicketScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
-                Text(text = "Ticket #: ${ticket.idTicket}")
+                Text(text = "Ticket #: ${ticket.ticketId}")
                 Text(text = "Fecha: ${ticket.fecha.take(10)}")
             }
             Row(
@@ -207,7 +207,7 @@ private fun TicketScreen(
                     text = "Empresa: ${ticket.empresa}",
                     style = MaterialTheme.typography.titleMedium
                 )
-                Text(text = "${ticket.getPeriod()} ago", color = MaterialTheme.colorScheme.error)
+                //Text(text = "${ticket.getPeriod()} ago", color = MaterialTheme.colorScheme.error)
             }
 
             Text(text = "Asunto: ${ticket.asunto}")
@@ -222,11 +222,11 @@ private fun TicketScreen(
 fun GreetingPreview() {
     HiltDemoTheme {
         val tickets = listOf(
-            TicketResponse(1, "2022-01-01", 1, "enel", "Gama", "necesito ayuda"),
-            TicketResponse(2, "2022-01-01", 1, "alexis", "Gama", "impresora mala"),
-            TicketResponse(22, "2022-01-01", 2, "joseph", "Gama", "sistema no abre"),
-            TicketResponse(33, "2022-01-01", 4, "robert", "Gama", "cable de red malo"),
-            TicketResponse(4, "2022-01-01", 1, "russo", "Gama", "fallo de red"),
+            Ticket(1, "2022-01-01",  "enel", "Gama", "necesito ayuda"),
+            Ticket(2, "2022-01-01",  "alexis", "Gama", "impresora mala"),
+            Ticket(22, "2022-01-01", "joseph", "Gama", "sistema no abre"),
+            Ticket(33, "2022-01-01", "robert", "Gama", "cable de red malo"),
+            Ticket(4, "2022-01-01",  "russo", "Gama", "fallo de red"),
         )
         TicketListBody(
             tickets = tickets,

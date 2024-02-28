@@ -7,7 +7,9 @@ import androidx.room.PrimaryKey
 data class Ticket(
     @PrimaryKey
     val ticketId: Int? = null,
+    var fecha: String = "",
     var cliente: String = "",
+    var empresa: String = "",
     var solicitadoPor: String = "",
     var asunto: String = "",
     var solicitud: String = ""
