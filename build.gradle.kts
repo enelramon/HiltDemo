@@ -4,4 +4,5 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.9.22" apply false //ultima version aqui: https://developer.android.com/jetpack/androidx/releases/compose-kotlin#kts
     id("com.google.devtools.ksp") version "1.9.22-1.0.17" apply false //aqui se busca la ultima version https://github.com/google/ksp/releases
     id("com.google.dagger.hilt.android") version "2.48" apply false
+    id("io.realm.kotlin") version "1.13.0" apply false
 }

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("io.realm.kotlin")
 
 }
 
@@ -95,6 +96,12 @@ dependencies {
     ksp("androidx.room:room-compiler:$roomVersion")
     //  optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$roomVersion")
+
+    //realm
+    implementation ("io.realm.kotlin:library-base:1.13.0")
+
+    //add timber for logging
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
